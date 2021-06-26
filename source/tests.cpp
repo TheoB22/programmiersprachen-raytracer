@@ -3,6 +3,8 @@
 #include "box.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 
 TEST_CASE("test volume and area of Sphere", "[vasphere]") {
@@ -28,6 +30,38 @@ TEST_CASE("test printign box and sphere") {
 	std::cout << s1 << std::endl;
 	Box b1({ 0,0,0 }, { 2,4,6 }, "b1", { 0,0,0 });
 	std::cout << b1 << std::endl;
+}
+
+TEST_CASE("intersect_ray_sphere", "[intersect]") {
+	//Ray
+	glm::vec3 ray_origin{ 0.0f, 0.0f, 0.0f };
+	// ray direction has to be normalized !
+	// you can use :
+	// v = glm :: normalize ( some_vector )
+	glm::vec3 ray_direction{ 0.0f, 0.0f, 1.0f };
+
+	// Sphere
+	glm::vec3 sphere_center{ 0.0f, 0.0f, 5.0f };
+	float sphere_radius{ 1.0f };
+	float distance = 0.0f;
+	auto result = glm::intersectRaySphere(
+		ray_origin, ray_direction,
+		sphere_center,
+		sphere_radius * sphere_radius, // squared radius !!!
+		distance);
+	REQUIRE(distance == Approx(4.0f));
+
+	Sphere s1({ 10,10,10 }, 1.0f, "s1", { 0,0,0 });
+	Ray r1{ {0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 1.0f} };
+	Hitpoint h1 = s1.intersect(r1);
+	REQUIRE(h1.intersected == true);
+	Ray r2{ {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f} };
+	Hitpoint h2 = s1.intersect(r2);
+	REQUIRE(h2.intersected == false);
+
+	Ray r3{ {10.0f, 10.0f, 10.0f}, {0.0f, 0.0f, 1.0f} };
+	Hitpoint h3 = s1.intersect(r3);
+	REQUIRE(h3.intersected == true);
 }
 
 int main(int argc, char *argv[])

@@ -3,6 +3,9 @@
 
 #include <glm/vec3.hpp>
 #include "shape.hpp"
+#include "hitpoint.hpp"
+#include "ray.hpp"
+#include "glm/gtx/intersect.hpp"
 # define M_PI 3.14159265358979323846
 
 class Sphere : public Shape {
@@ -14,6 +17,8 @@ public:
 	float volume() const override;
 
 	std::ostream& print(std::ostream& os) const override;
+
+	Hitpoint intersect(Ray& ray) const;
 
 protected:
 	glm::vec3 center_;
