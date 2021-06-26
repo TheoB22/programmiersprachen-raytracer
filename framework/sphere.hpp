@@ -7,19 +7,15 @@
 
 class Sphere : public Shape {
 public:
-	Sphere(glm::vec3 center, float r) :
-		center_{ center },
-		radius_{ r } {};
+	Sphere(glm::vec3 const& center, float r, std::string const& name, Color const& color);
 
-	float area() const override {
-		return (4 * M_PI * radius_ * radius_);
-	}
+	float area() const override;
 
-	float volume() const override {
-		return (M_PI * 4 / 3 * radius_ * radius_ * radius_);
-	}
+	float volume() const override;
 
-private:
+	std::ostream& print(std::ostream& os) const override;
+
+protected:
 	glm::vec3 center_;
 	float radius_;
 };
