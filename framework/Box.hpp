@@ -15,7 +15,7 @@ public:
 
 	std::ostream& print(std::ostream& os) const override;
 
-protected:
+private:
 	glm::vec3 min_;
 	glm::vec3 max_;
 	float a_;

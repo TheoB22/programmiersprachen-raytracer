@@ -5,7 +5,7 @@
 #include "sphere.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
-
+/*
 
 TEST_CASE("test volume and area of Sphere", "[vasphere]") {
 	Sphere s1({ 0,0,0 }, 1.0f, "s1", { 0,0,0 });
@@ -62,6 +62,21 @@ TEST_CASE("intersect_ray_sphere", "[intersect]") {
 	Ray r3{ {10.0f, 10.0f, 10.0f}, {0.0f, 0.0f, 1.0f} };
 	Hitpoint h3 = s1.intersect(r3);
 	REQUIRE(h3.intersected == true);
+}
+*/
+TEST_CASE("destructor test", "[des]") {
+	Color red{ 255 , 0, 0 };
+	glm::vec3 position{ 0.0f, 0.0f, 0.0f };
+
+	Sphere* s1 = new Sphere{  position , 1.2f , "sphere0 ", red, };
+	Shape* s2 = new Sphere{ position , 1.2f , "sphere1 ", red};
+
+	std::cout << "\n";
+	s1->print(std::cout);
+	s2->print(std::cout);
+
+	delete s1;
+	delete s2;
 }
 
 int main(int argc, char *argv[])

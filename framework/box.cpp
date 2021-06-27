@@ -18,6 +18,7 @@ float Box::volume() const {
 }
 
 std::ostream& Box::print(std::ostream& os) const {
-	os << name_ << " Color: " << color_ << " a: " << a_ << " b: " << b_ << " c: " << c_;
+	Shape::print(os);
+	os << " a: " << a_ << " b: " << b_ << " c: " << c_;
 	return os;
 }
