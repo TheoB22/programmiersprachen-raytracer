@@ -1,0 +1,18 @@
+5.7 beide Variablen haben den dynamischen Typ std::shared_ptrr<Sphere> s1, hat jedoch den statischen Typ
+std::shared_ptr<Sphere> und s2 den statischen Typ std::shared_ptr<Shape>
+Der statische Typ ist abhängig von der Deklaration und der dynamische ist abhängig von dem Wert
+Der statische Typ wird zur Übersetzungszeit überprüft und der dynamishce Typ zur Laufzeit
+
+5.5 override stellt sicher ,dass die zugehörie Methode virtuell ist und eine virtuelle Methode überschreibt.
+Der Compiler kan nso auch darauf hinweisen, wenn der Codee falsch ist, man also eine Methode unbeabsichtigt 
+versteckt, wenn man die Signatur ändert.
+
+5.8 bei virtual werden 4 destructor aufgerufen bei non virtual nur 3. Dies liegt daran, dass virtual Methoden
+abhängig vom dynamischen Typ und non-virtaul Methoden abhängig vom statischen Typ aufgerufen werden, dass heißt
+bei virtual wird beide Male der Destructor von Sphere aufgerufen, welcher in sich den Default destructor von Shape
+aufruft. Bei non-virtual wird jedoch einmal der Sphere und einmal der Shape Destructor aufgerufen, da s2 vom 
+statischen Typ Shape ist. beide Variablen haben den dynamischen Typ Sphere.
+
+5.9 Klassendiagramm stellt sozusagen die statischen Beziehungen der Klassen dar. Das heißt wie siede zu einande
+in Beziehung stehen. Objekthierachie stellt die dynamische Zugehörigkeit dar. Also wie die die zur Laufzeit erzeugt
+wurden zueinander in Beziehungen stehen.
